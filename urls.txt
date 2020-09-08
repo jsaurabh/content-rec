@@ -1,0 +1,9 @@
+https://www.datacamp.com/courses/machine-learning-with-pyspark
+https://www.datacamp.com/courses/feature-engineering-for-machine-learning-in-python
+https://www.datacamp.com/courses/machine-learning-for-finance-in-python
+https://www.datacamp.com/courses/supervised-learning-with-scikit-learn
+https://www.datacamp.com/courses/introduction-to-natural-language-processing-in-python
+https://www.datacamp.com/courses/machine-learning-with-tree-based-models-in-python
+https://datacamp.com/courses/intro-to-python-for-data-science
+https://www.datacamp.com/courses/extreme-gradient-boosting-with-xgboost
+https://www.datacamp.com/courses/machine-learning-for-business
