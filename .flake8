@@ -1,0 +1,7 @@
+[flake8]
+ignore = W292, W293, E302, F541
+doctests = True
+max-line-length = 100
+max-complexity = 12
+select = E,W,F,C
+exclude = .git, .vscode
