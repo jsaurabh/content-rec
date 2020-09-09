@@ -52,12 +52,10 @@ def extract_datacamp(url: str = None, lang: str = None, medium: str = None,
         time = soup.find("li", class_="header-hero__stat--hours").text
     
         coursetracks = soup.find_all("li", class_="course__track")
+        prereq = soup.find_all("li", class_="course__prerequisite")
 
-        paths = []
-        for item in coursetracks:
-            paths.append(item.text.strip())
-
-        path_string = ",".join(item for item in paths)
+        path_string = ",".join(item.text.strip() for item in coursetracks)
+        prereq_string = ",".join(item.text.strip() for item in prereq)
     except AttributeError:
         # inconsistencies in DataCamp HTML DOM
         logger.info(url)
@@ -72,6 +70,7 @@ def extract_datacamp(url: str = None, lang: str = None, medium: str = None,
         "time": time.strip(),
         "language": lang,
         "paths": path_string,
+        "prerequisites": prereq_string,
         "medium": medium,
         "type": _type
     }
@@ -81,7 +80,7 @@ def extract_datacamp(url: str = None, lang: str = None, medium: str = None,
 def write(output: str = None, res: list = None) -> None:
     with open(output, 'w') as csvfile:
         fields = ['title', 'description', 'provider', 'url', 'time', 'language',
-                  'paths', 'medium', 'type']
+                  'paths', 'prerequisites', 'medium', 'type']
         writer = csv.DictWriter(csvfile, fieldnames=fields)
 
         writer.writeheader()
