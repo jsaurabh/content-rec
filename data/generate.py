@@ -48,7 +48,7 @@ def extract_datacamp(url: str = None, lang: str = None, medium: str = None,
 
     try:
         title = soup.find("meta", property="og:title")['content']
-        description = soup.find("meta", attrs={"name": "description"})['content']
+        description = soup.find("p", class_="course__description").text
         time = soup.find("li", class_="header-hero__stat--hours").text
     
         coursetracks = soup.find_all("li", class_="course__track")
@@ -66,7 +66,7 @@ def extract_datacamp(url: str = None, lang: str = None, medium: str = None,
 
     info = {
         "title": title.strip(),
-        "description": description.strip(),
+        "description": description.strip().replace("\n", ""),
         "provider": "DataCamp",
         "url": url,
         "time": time.strip(),
