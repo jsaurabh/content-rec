@@ -19,7 +19,7 @@ class TestParser(unittest.TestCase):
         test_url = "https://www.datacamp.com/courses/natural-language-generation-in-python"
         test_answer = {
             'title': 'Natural Language Generation in Python',
-            'description': 'Learn to generate language in Python using Deep Learning in Python.',
+            'description': "Have you ever wondered how Gmail autocompletes your sentences, or, what powers the WhatsApp suggestions when you’re typing a message? The technology behind these helpful writing hints is machine learning. In this course, you'll build and train machine learning models for different natural language generation tasks. For example, you'll train a model on the literary works of Shakespeare and generate text in the style of his writing. You'll also learn how to create a neural translation model to translate English sentences into French. Finally, you'll train a seq2seq model to generate your own natural language autocomplete sentences, just like Gmail!",  # noqa: E501
             'provider': 'DataCamp',
             'url': 'https://www.datacamp.com/courses/natural-language-generation-in-python',
             'time': '4 hours',
