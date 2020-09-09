@@ -48,7 +48,8 @@ def extract_datacamp(url: str = None, lang: str = None, medium: str = None,
 
     try:
         title = soup.find("meta", property="og:title")['content']
-        description = soup.find("meta", attrs={"name": "description"})['content']
+        short_description = soup.find("meta", attrs={"name": "description"})['content']
+        long_description = soup.find("p", class_="course__description").text
         time = soup.find("li", class_="header-hero__stat--hours").text
     
         coursetracks = soup.find_all("li", class_="course__track")
@@ -64,7 +65,8 @@ def extract_datacamp(url: str = None, lang: str = None, medium: str = None,
 
     info = {
         "title": title.strip(),
-        "description": description.strip(),
+        "short_description": short_description.strip(),
+        "long_description": long_description.strip().replace("\n", ""),
         "provider": "DataCamp",
         "url": url,
         "time": time.strip(),
@@ -79,8 +81,8 @@ def extract_datacamp(url: str = None, lang: str = None, medium: str = None,
 
 def write(output: str = None, res: list = None) -> None:
     with open(output, 'w') as csvfile:
-        fields = ['title', 'description', 'provider', 'url', 'time', 'language',
-                  'paths', 'prerequisites', 'medium', 'type']
+        fields = ['title', 'short_description', 'long_description', 'provider', 'url',
+                  'time', 'language', 'paths', 'prerequisites', 'medium', 'type']
         writer = csv.DictWriter(csvfile, fieldnames=fields)
 
         writer.writeheader()

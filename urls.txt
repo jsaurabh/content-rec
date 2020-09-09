@@ -4,6 +4,15 @@ https://www.datacamp.com/courses/machine-learning-for-finance-in-python
 https://www.datacamp.com/courses/supervised-learning-with-scikit-learn
 https://www.datacamp.com/courses/introduction-to-natural-language-processing-in-python
 https://www.datacamp.com/courses/machine-learning-with-tree-based-models-in-python
-https://datacamp.com/courses/intro-to-python-for-data-science
 https://www.datacamp.com/courses/extreme-gradient-boosting-with-xgboost
 https://www.datacamp.com/courses/machine-learning-for-business
+https://www.datacamp.com/courses/linear-classifiers-in-python
+https://www.datacamp.com/courses/machine-learning-for-time-series-data-in-python
+https://www.datacamp.com/courses/ai-fundamentals
+https://www.datacamp.com/courses/introduction-to-deep-learning-with-pytorch
+https://www.datacamp.com/courses/image-processing-with-keras-in-python
+https://www.datacamp.com/courses/advanced-nlp-with-spacy
+https://www.datacamp.com/courses/sentiment-analysis-in-python
+https://www.datacamp.com/courses/recommendation-engines-in-pyspark
+https://www.datacamp.com/courses/machine-learning-for-marketing-in-python
+https://www.datacamp.com/courses/natural-language-generation-in-python
