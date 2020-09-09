@@ -7,8 +7,12 @@ import argparse
 import requests
 import logging
 
+from tqdm import tqdm
 import tldextract
+
 from bs4 import BeautifulSoup
+
+logger = logging.getLogger('logger')
 
 def argument_parser(epilog: str = None) -> argparse.ArgumentParser:
     """
@@ -24,15 +28,14 @@ def argument_parser(epilog: str = None) -> argparse.ArgumentParser:
         python generate.py --file URLFILE.txt --o DATASET.csv
     """)
 
-    parser.add_argument("--file", "-f", type=str,
+    parser.add_argument("--file", "-f", type=str, default="urls.txt",
                         help="Enter filename which contains line separated URLS")
     parser.add_argument("--lang", "-l", type=str, default="Python",
                         help="Enter language of coursework of the input URLs")
     parser.add_argument("--out", "-o", type=str, default="data/dataset.csv",
                         help="Enter a name for the generated dataset")
 
-    args = parser.parse_args()
-    return args
+    return parser
 
 def extract_datacamp(url: str = None, lang: str = None, medium: str = None,
                      _type: str = None) -> dict:
@@ -75,14 +78,23 @@ def extract_datacamp(url: str = None, lang: str = None, medium: str = None,
 
     return info
 
-def run(args: argparse.Namespace) -> None:
+def write(output: str = None, res: list = None) -> None:
+    with open(output, 'w') as csvfile:
+        fields = ['title', 'description', 'provider', 'url', 'time', 'language',
+                  'paths', 'medium', 'type']
+        writer = csv.DictWriter(csvfile, fieldnames=fields)
+
+        writer.writeheader()
+        for item in res:
+            writer.writerow(item)
+
+def run(args: argparse.Namespace) -> list:
     """
     Use BeautifulSoup to extract info from passed URL and generate a
     .csv dataset file.
     """
 
     infile = args.file
-    outfile = args.out
     lang = args.lang
 
     with open(infile, 'r') as f:
@@ -91,25 +103,19 @@ def run(args: argparse.Namespace) -> None:
     logger.info("Parsing URL HTML using BeautifulSoup")
     results = []
 
-    for line in lines:
+    for line in tqdm(lines):
         URL = line.strip()
         root = tldextract.extract(URL)
 
         if root.domain == "datacamp":
             info = extract_datacamp(URL, lang=lang, medium="video", _type="course")
             results.append(info)
-
-    with open(outfile, 'w') as csvfile:
-        fields = ['title', 'description', 'provider', 'url', 'time', 'language',
-                  'paths', 'medium', 'type']
-        writer = csv.DictWriter(csvfile, fieldnames=fields)
-
-        writer.writeheader()
-        for item in results:
-            writer.writerow(item)
+    
+    return results
 
 
 if __name__ == "__main__":
-    logger = logging.getLogger('logger')
-    args = argument_parser()
-    run(args)
+    parser = argument_parser()
+    args = parser.parse_args()
+    res = run(args)
+    write(args.out, res)
