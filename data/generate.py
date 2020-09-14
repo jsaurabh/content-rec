@@ -9,7 +9,6 @@ import logging
 
 from tqdm import tqdm
 import tldextract
-
 from bs4 import BeautifulSoup
 
 logger = logging.getLogger('logger')
@@ -34,6 +33,8 @@ def argument_parser(epilog: str = None) -> argparse.ArgumentParser:
                         help="Enter language of coursework of the input URLs")
     parser.add_argument("--out", "-o", type=str, default="data/dataset.csv",
                         help="Enter a name for the generated dataset")
+    parser.add_argument("--medium", "--m", choices=[True, False],
+                        help="Build a corpus of articles from Medium")
 
     return parser
 
